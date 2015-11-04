@@ -24,7 +24,7 @@ module Fyber
       if(response.status != 200)
         @errors = body and return
       else
-        return body['offers']
+        return( body['offers'] || [])
       end
     end
 
