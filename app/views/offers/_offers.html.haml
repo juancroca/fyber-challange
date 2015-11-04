@@ -1,0 +1,18 @@
+- unless @offers.empty?
+  -@offers.each_slice(3) do |offers|
+    .row
+      -offers.each do |offer|
+        .col-lg-4
+          .row
+            .col-lg-2
+              =image_tag(offer['thumbnail']['lowres'])
+            .col-lg-10
+              %h4
+                =offer['title']
+              %p
+                =offer['teaser']
+              %h5
+                =offer['payout']
+-else
+  %h2.text-center
+    No offers found

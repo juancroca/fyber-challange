@@ -1,0 +1,8 @@
+.container
+  =simple_form_for :offer, html:{"data-remote" => true} do |f|
+    =f.input :uid
+    =f.input :page
+    =f.input :pub0
+    =f.button :submit
+  %hr
+  #offers
