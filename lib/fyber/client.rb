@@ -32,8 +32,8 @@ module Fyber
     attr_accessor :connection, :api_key
     attr_writer :errors
     def get_hashkey(params={})
-      timestamp = Time.now.to_i
-      query = params.merge({timestamp: timestamp}).map{|key, value| "#{key}=#{value}"}.join('&') + "&#{@api_key}"
+      timestamp = Time.now.to_i.to_s
+      query = params.merge!({"timestamp" => timestamp}).sort.map{|value| "#{value[0]}=#{value[1]}"}.join('&') + "&#{@api_key}"
       hashkey = Digest::SHA1.hexdigest query
       {hashkey: hashkey, timestamp: timestamp}
     end

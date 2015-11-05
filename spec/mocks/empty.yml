@@ -1,2 +1,13 @@
 code: "NO_CONTENT"
 message: "Successful request, but no offers are currently available for this user."
+count: 0
+pages: 0
+information:
+  app_name: "Demo iframe for publisher - do not touch"
+  appid: 157
+  virtual_currency: "Coins"
+  virtual_currency_sale_enabled: false
+  country: "DE"
+  language: "DE"
+  support_url: "http://offer.fyber.com/mobile/support?appid=157&client=api&uid=player1"
+offers: []

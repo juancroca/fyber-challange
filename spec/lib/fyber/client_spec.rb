@@ -5,9 +5,9 @@ RSpec.describe Fyber::Client do
     success = YAML.load_file("#{Rails.root}/spec/mocks/success.yml").to_json
     error   = YAML.load_file("#{Rails.root}/spec/mocks/error.yml").to_json
     empty   = YAML.load_file("#{Rails.root}/spec/mocks/empty.yml").to_json
-    stub_request(:get, "api.fyber.com/feed/v1/offers.json").with(:query => hash_including({uid: "success"})).to_return(body: success)
-    stub_request(:get, "api.fyber.com/feed/v1/offers.json").with(:query => hash_including({uid: "error"})).to_return(body: error, status: 401)
-    stub_request(:get, "api.fyber.com/feed/v1/offers.json").with(:query => hash_including({uid: "empty"})).to_return(body: empty)
+    stub_request(:get, "api.fyber.com/feed/v1/offers.json").with(:query => hash_including({"uid"=>"success"})).to_return(body: success)
+    stub_request(:get, "api.fyber.com/feed/v1/offers.json").with(:query => hash_including({"uid"=>"error"})).to_return(body: error, status: 401)
+    stub_request(:get, "api.fyber.com/feed/v1/offers.json").with(:query => hash_including({"uid"=>"empty"})).to_return(body: empty)
   end
 
   describe "#new" do
@@ -42,29 +42,29 @@ RSpec.describe Fyber::Client do
       end
 
       it "should have errors if wrong params" do
-        client.get_offers(params.merge(uid: 'error'))
+        client.get_offers(params.merge("uid"=>'error'))
         expect(client.errors).not_to be_empty
       end
     end
 
     context "with right arguments" do
       it "should not have errors" do
-        client.get_offers(params.merge(uid: 'success'))
+        client.get_offers(params.merge("uid"=>'success'))
         expect(client.errors).to be_empty
       end
 
       it "should not have argument errors with correct uid" do
-        client.get_offers(params.merge(uid: 'success'))
+        client.get_offers(params.merge("uid"=>'success'))
         expect(client.errors[:argument]).to be_nil
       end
 
       it "should return offers if they exist" do
-        offers = client.get_offers(params.merge(uid: 'success'))
+        offers = client.get_offers(params.merge("uid"=>'success'))
         expect(offers).not_to be_empty
       end
 
       it "should return no offers if they dont exist" do
-        offers = client.get_offers(params.merge(uid: 'empty'))
+        offers = client.get_offers(params.merge("uid"=>'empty'))
         expect(offers).to be_empty
       end
     end
